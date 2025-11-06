@@ -56,7 +56,11 @@ public class DishServlet extends HttpServlet {
 
         String chefId = req.getParameter("chefId");
 
-        resp.sendRedirect("/dish?chefId="+chefId);
+        if (chefId == null || chefId.isEmpty()) {
+            resp.sendRedirect("/listChefs");
+        } else {
+            resp.sendRedirect("/dish?chefId=" + chefId);
+        }
 
     }
 }
