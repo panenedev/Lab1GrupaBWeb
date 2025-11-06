@@ -62,7 +62,11 @@ public class ChefDetailsServlet extends HttpServlet {
         String chefId = req.getParameter("chefId");
         String chefName = req.getParameter("chefName");
 
-        resp.sendRedirect("/chefDetails?dishId="+dishId+"&chefId="+chefId);
+        if (dishId==null||dishId.isEmpty()){
+            resp.sendRedirect("/dish");
+        }else if (chefId==null||chefId.isEmpty()){
+            resp.sendRedirect("/listChefs");
+        }else resp.sendRedirect("/chefDetails?dishId="+dishId+"&chefId="+chefId);
 
 
     }
