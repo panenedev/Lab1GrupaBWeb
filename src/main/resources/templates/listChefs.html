@@ -20,22 +20,22 @@
 </header>
 <main>
     <h2>Choose a chef:</h2>
-    <form action="/dish" method="POST">
-
+    <form action="/dishes" method="POST">
+        <!-- Display radio buttons for each chef,
+             the value should be the chef id
+             and the displayed text should be:
+             Name: <firstName> <lastName>, Bio: <bio> -->
         <th:block th:each="chef : ${chefs}">
-
             <label>
                 <input type="radio" name="chefId" th:value="${chef.id}"/>
                 Name: <span th:text="${chef.firstName}"></span>
                 <span th:text="${chef.lastName}"></span>,
                 Bio: <span th:text="${chef.bio}"></span>
             </label>
-            <br>
+            <br/>
         </th:block>
         <br/>
         <input type="submit" value="Submit"/>
-        <p th:if="${param.error}" style="font-weight: bolder">Please select a chef.</p>
-
     </form>
 </main>
 </body>
