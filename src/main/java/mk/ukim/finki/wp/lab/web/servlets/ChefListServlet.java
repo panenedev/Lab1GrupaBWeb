@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlets;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "ChefListServlet", urlPatterns = "/listChefs",
+@WebServlet(name = "ChefListServlet", urlPatterns = "/servlet/listChefs",
         initParams = {
         @WebInitParam(name="day",value="200")
         }

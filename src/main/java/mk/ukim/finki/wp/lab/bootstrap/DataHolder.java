@@ -17,11 +17,11 @@ public class DataHolder {//DataBase
     @PostConstruct // init na values(lists)
     public void init(){
 
-        chefs.add(new Chef(1L, "Marco", "Vitale", "Master of traditional Italian cuisine and wood-fired pizza.", new ArrayList<>()));
-        chefs.add(new Chef(2L, "Elena", "Hristova", "Specialist in pastry, desserts & chocolate art.", new ArrayList<>()));
-        chefs.add(new Chef(3L, "David", "Jovanov", "BBQ grill master and smoked meat enthusiast.", new ArrayList<>()));
-        chefs.add(new Chef(4L, "Ivana", "Trajkova", "Focused on vegan meals and healthy nutritional cooking.", new ArrayList<>()));
-        chefs.add(new Chef(5L, "Nikola", "Petreski", "Modern fusion cuisine expert, experiments with flavors.", new ArrayList<>()));
+        chefs.add(new Chef( "Marco", "Vitale", "Master of traditional Italian cuisine and wood-fired pizza.", new ArrayList<>()));
+        chefs.add(new Chef("Elena", "Hristova", "Specialist in pastry, desserts & chocolate art.", new ArrayList<>()));
+        chefs.add(new Chef( "David", "Jovanov", "BBQ grill master and smoked meat enthusiast.", new ArrayList<>()));
+        chefs.add(new Chef( "Ivana", "Trajkova", "Focused on vegan meals and healthy nutritional cooking.", new ArrayList<>()));
+        chefs.add(new Chef( "Nikola", "Petreski", "Modern fusion cuisine expert, experiments with flavors.", new ArrayList<>()));
 
         dishes.add(new Dish("d1", "Margherita Pizza", "Italian", 20));
         dishes.add(new Dish("d2", "Chocolate Lava Cake", "Dessert", 30));

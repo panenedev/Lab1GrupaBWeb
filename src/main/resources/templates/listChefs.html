@@ -21,12 +21,10 @@
 <main>
     <h2>Choose a chef:</h2>
     <form action="/dishes" method="POST">
-        <!-- Display radio buttons for each chef,
-             the value should be the chef id
-             and the displayed text should be:
-             Name: <firstName> <lastName>, Bio: <bio> -->
         <th:block th:each="chef : ${chefs}">
             <label>
+                <a th:href="@{/listChefs/edit/{id}(id = ${chef.id})}">Edit</a>
+                <a th:href="@{/listChefs/delete/{id}(id = ${chef.id})}">Delete</a>
                 <input type="radio" name="chefId" th:value="${chef.id}"/>
                 Name: <span th:text="${chef.firstName}"></span>
                 <span th:text="${chef.lastName}"></span>,
@@ -36,6 +34,9 @@
         </th:block>
         <br/>
         <input type="submit" value="Submit"/>
+    </form>
+    <form action="/listChefs/add" method="GET">
+        <input type="submit" value="Add chef">
     </form>
 </main>
 </body>

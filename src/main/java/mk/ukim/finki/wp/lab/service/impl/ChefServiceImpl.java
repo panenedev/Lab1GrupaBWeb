@@ -41,4 +41,15 @@ public class ChefServiceImpl implements ChefService {
 
         return chef;
     }
+
+    @Override
+    public Chef save(Chef chef) {
+        this.chefRepository.save(chef);
+        return chef;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.chefRepository.deleteById(id);
+    }
 }

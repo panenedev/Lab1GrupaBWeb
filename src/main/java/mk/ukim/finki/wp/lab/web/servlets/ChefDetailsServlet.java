@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.web;
+package mk.ukim.finki.wp.lab.web.servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mk.ukim.finki.wp.lab.model.Chef;
+import mk.ukim.finki.wp.lab.model.Dish;
 import mk.ukim.finki.wp.lab.service.ChefService;
 import mk.ukim.finki.wp.lab.service.DishService;
 import org.thymeleaf.context.WebContext;
@@ -15,16 +16,16 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.IOException;
 
-@WebServlet(name = "DishServlet", urlPatterns = "/dish")
-public class DishServlet extends HttpServlet {
+@WebServlet(name="ChefDetails", urlPatterns = "/chefDetails")
+public class ChefDetailsServlet extends HttpServlet {
 
-    private final DishService dishService;
     private final ChefService chefService;
+    private final DishService dishService;
     private final SpringTemplateEngine springTemplateEngine;
 
-    public DishServlet(DishService dishService, ChefService chefService,SpringTemplateEngine springTemplateEngine) {
-        this.dishService = dishService;
+    public ChefDetailsServlet(ChefService chefService, DishService dishService, SpringTemplateEngine springTemplateEngine) {
         this.chefService = chefService;
+        this.dishService = dishService;
         this.springTemplateEngine = springTemplateEngine;
     }
 
@@ -37,29 +38,36 @@ public class DishServlet extends HttpServlet {
 
         WebContext context = new WebContext(webExchange);
 
+        String dishId = req.getParameter("dishId");
         String param = req.getParameter("chefId");
+
         Long chefId = Long.parseLong(param);
 
+        Dish dish = this.dishService.findByDishId(dishId);
         Chef chef = this.chefService.findById(chefId);
 
-        context.setVariable("dishes",this.dishService.listDishes());
-        context.setVariable("chefId",chef.getId());
-        context.setVariable("chefName",chef.getFirstName()+" "+chef.getLastName());
+        chef.getDishes().add(dish);
 
-        springTemplateEngine.process("dishesList.html",context,resp.getWriter());
+        context.setVariable("chef",chef);
+        context.setVariable("dishes",chef.getDishes());
 
+        springTemplateEngine.process("chefDetails.html",context,resp.getWriter());
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String dishId = req.getParameter("dishId");
         String chefId = req.getParameter("chefId");
+        String chefName = req.getParameter("chefName");
 
-        if (chefId==null||chefId.isEmpty()){
+        if (dishId==null||dishId.isEmpty()){
+            resp.sendRedirect("/dish");
+        }else if (chefId==null||chefId.isEmpty()){
             resp.sendRedirect("/listChefs");
-        }else {
-            resp.sendRedirect("/dish?chefId=" + chefId);
-        }
+        }else resp.sendRedirect("/chefDetails?dishId="+dishId+"&chefId="+chefId);
+
+
     }
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chef-form</title>
+</head>
+<body>
+
+<h1 th:text="${chef != null} ? 'Edit Chef' : 'Add New Chef'"></h1>
+
+<!-- ====================== EDIT FORM ====================== -->
+
+<form th:if="${chef != null}"
+      th:action="@{/listChefs/editChef/{id}(id = ${chef.id})}"
+      method="POST">
+
+    <input type="hidden" th:value="${chef.id}" name="chefId">
+
+    <div>
+        <label for="firstname">First Name:</label>
+        <input id="firstname"
+               type="text"
+               name="firstName"
+               required
+               th:value="${chef.getFirstName()}"/>
+    </div>
+
+    <div>
+        <label for="lastname">Last Name:</label>
+        <input id="lastname"
+               type="text"
+               name="lastName"
+               required
+               th:value="${chef.getLastName()}"/>
+    </div>
+
+    <div>
+        <label for="bio">Bio:</label>
+        <input id="bio"
+               type="text"
+               name="bio"
+               required
+               th:value="${chef.getBio()}"/>
+    </div>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+
+<!-- ====================== ADD FORM ====================== -->
+
+<form th:if="${chef == null}"
+      th:action="@{/listChefs/addChef}"
+      method="POST">
+    <div>
+        <label for="firstname">First Name:</label>
+        <input id="firstnameAdd"
+               type="text"
+               name="firstName"
+               required
+               />
+    </div>
+
+    <div>
+        <label for="lastname">Last Name:</label>
+        <input id="lastnameAdd"
+               type="text"
+               name="lastName"
+               required
+               >
+    </div>
+
+    <div>
+        <label for="bio">Bio:</label>
+        <input id="bioAdd"
+               type="text"
+               name="bio"
+               required
+               />
+    </div>
+    <button type="submit">Add Chef</button>
+</form>
+
+
+</body>
+</html>

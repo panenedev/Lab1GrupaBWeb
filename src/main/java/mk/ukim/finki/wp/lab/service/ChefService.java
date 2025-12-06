@@ -9,5 +9,6 @@ public interface ChefService {
     List<Chef> listChefs();
     Chef findById(Long id);
     Chef addDishToChef(Long chefId, String dishId);
-
+    Chef save(Chef chef);
+    void deleteById(Long id);
 }

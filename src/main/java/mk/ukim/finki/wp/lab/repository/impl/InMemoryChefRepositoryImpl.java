@@ -24,9 +24,14 @@ public class InMemoryChefRepositoryImpl implements ChefRepository {
     @Override
     public Chef save(Chef chef) {
 
-        DataHolder.chefs.removeIf(c->c.equals(chef.getId()));
+        DataHolder.chefs.removeIf(c->c.getId().equals(chef.getId()));
         DataHolder.chefs.add(chef);
 
         return chef;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        DataHolder.chefs.removeIf(c->c.getId().equals(id));
     }
 }
