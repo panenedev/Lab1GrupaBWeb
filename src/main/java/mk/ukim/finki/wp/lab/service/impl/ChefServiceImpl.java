@@ -43,7 +43,7 @@ public class ChefServiceImpl implements ChefService {
             this.chefRepository.save(chef);
             chef.getDishes().add(dish);
         }
-        this.chefRepository.save(chef);
+        this.chefRepository.save(chef);//hhihuru hahara htestce
 
         return chef;
     }
