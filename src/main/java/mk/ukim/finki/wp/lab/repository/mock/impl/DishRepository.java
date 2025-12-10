@@ -1,4 +1,4 @@
-package mk.ukim.finki.wp.lab.repository;
+package mk.ukim.finki.wp.lab.repository.mock.impl;
 
 import mk.ukim.finki.wp.lab.model.Dish;
 
@@ -12,5 +12,4 @@ public interface DishRepository {
     Optional<Dish> findById(Long id);
     Dish save(Dish dish);
     void deleteById(Long id);
-
 }

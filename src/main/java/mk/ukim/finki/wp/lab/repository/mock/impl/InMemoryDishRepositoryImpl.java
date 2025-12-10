@@ -1,11 +1,9 @@
-package mk.ukim.finki.wp.lab.repository.impl;
+package mk.ukim.finki.wp.lab.repository.mock.impl;
 
 import mk.ukim.finki.wp.lab.bootstrap.DataHolder;
 import mk.ukim.finki.wp.lab.model.Dish;
-import mk.ukim.finki.wp.lab.repository.DishRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +38,5 @@ public class InMemoryDishRepositoryImpl implements DishRepository {
         DataHolder.dishes.removeIf(d->d.getId().equals(id));
 
     }
+
 }

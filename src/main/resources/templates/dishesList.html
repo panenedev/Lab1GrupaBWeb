@@ -46,7 +46,7 @@
 <section>
   <h2>Select dish:</h2>
   <a th:href="@{dishes/dish-form}">Add new Dish</a>
-  <form action="/chefDetails" method="POST">
+  <form action="/listChefs/chefDetails" method="POST">
     <!-- Dynamically display radio buttons for each dish -->
 
     <th:block th:each="dish : ${dishes}">
