@@ -2,8 +2,8 @@ package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Chef;
 import mk.ukim.finki.wp.lab.model.Dish;
-import mk.ukim.finki.wp.lab.repository.ChefRepository;
-import mk.ukim.finki.wp.lab.repository.DishRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ChefRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.DishRepository;
 import mk.ukim.finki.wp.lab.service.ChefService;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +36,13 @@ public class ChefServiceImpl implements ChefService {
         Chef chef = this.chefRepository.findById(chefId).orElse(null);
         Dish dish = this.dishRepository.findByDishId(dishId);
 
-        chef.getDishes().add(dish);
+        if(chef != null && dish != null) {
+
+            dish.setChef(chef);
+
+            this.chefRepository.save(chef);
+            chef.getDishes().add(dish);
+        }
         this.chefRepository.save(chef);
 
         return chef;
@@ -52,4 +58,6 @@ public class ChefServiceImpl implements ChefService {
     public void deleteById(Long id) {
         this.chefRepository.deleteById(id);
     }
+
+
 }

@@ -1,7 +1,9 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
 import mk.ukim.finki.wp.lab.model.Chef;
+import mk.ukim.finki.wp.lab.model.Dish;
 import mk.ukim.finki.wp.lab.service.ChefService;
+import mk.ukim.finki.wp.lab.service.DishService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +15,11 @@ import java.util.ArrayList;
 public class ChefController {
 
     private final ChefService chefService;
+    private final DishService dishService;
 
-    public ChefController(ChefService chefService) {
+    public ChefController(ChefService chefService, DishService dishService) {
         this.chefService = chefService;
+        this.dishService = dishService;
     }
 
     //Show page
@@ -51,10 +55,30 @@ public class ChefController {
     public String getAddPage(){
         return "chef-form";
     }
+
     @PostMapping("/addChef")
     public String addChef(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String bio){
         Chef chef = new Chef(firstName, lastName, bio, new ArrayList<>());
         this.chefService.save(chef);
         return "redirect:/listChefs";
+    }
+
+    @GetMapping("/chefDetails")
+    public String getChefDetailsPage(@RequestParam Long chefId, Model model){
+
+        Chef chef = this.chefService.findById(chefId);
+        model.addAttribute("chef", chef);
+        model.addAttribute("dishes",chef.getDishes());
+
+        return "chefDetails";
+    }
+
+    @PostMapping("/chefDetails")
+    public String chefDetails(@RequestParam Long chefId, @RequestParam String dishId, Model model){
+
+
+        this.chefService.addDishToChef(Long.valueOf(chefId), dishId);
+
+        return "redirect:/listChefs/chefDetails?chefId=" + chefId;
     }
 }
