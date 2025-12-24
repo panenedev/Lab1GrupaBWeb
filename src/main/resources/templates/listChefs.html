@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Restaurant Chefs - Welcome to Our Restaurant</title>
@@ -35,7 +35,7 @@
         <br/>
         <input type="submit" value="Submit"/>
     </form>
-    <form action="/listChefs/add" method="GET">
+    <form sec:authorize="hasRole('ADMIN')" action="/listChefs/add" method="GET">
         <input type="submit" value="Add chef">
     </form>
 </main>
